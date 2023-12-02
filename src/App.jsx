@@ -1,14 +1,17 @@
 import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import data from '../data.json'
+import Confetti from './components/Confetti'
+
 
 const App = () => {
-  const comp = useRef(null);
-  const spans = ['#copy1', '#copy2', '#copy3', '#copy4'];
-  const intro = '#introSection';
-  const next = '#nextSection';
+  const introRef = useRef(null);
 
   useLayoutEffect(() => {
+    const spans = ['#copy1', '#copy2', '#copy3', '#copy4'];
+    const intro = '#introSection';
+    const next = '#nextSection';
+
     let ctx = gsap.context(() => {
       const timeline = gsap.timeline();
 
@@ -20,7 +23,7 @@ const App = () => {
       .from(spans, {
         opacity: 0,
         y: '+=30',
-        stagger: 0.5
+        stagger: 1
       })
       .to(spans, {
         opacity: 0,
@@ -36,19 +39,19 @@ const App = () => {
         opacity: 0,
         duration: 0.5
       })
-    }, comp);
+    }, introRef);
 
-    return () => ctx.revert();
+  return () => ctx.revert();
   }, []);
 
 
   return (
-    <div className="relative" ref={comp}>
+    <div className="relative" ref={introRef}>
       <div 
         id="introSection"
         className="h-screen flex flex-col justify-center place-items-center p-10 bg-red-700 absolute top-0 left-0 z-10 w-full gap-10 tracking-tight">
           <h1 className="text-6xl font-semibold text-white">
-            {data.h1.map((span, i) => (
+            {data.themes.xmas.map((span, i) => (
               <span key={i} id={`copy${i + 1}`} className="block">
                 {span.copy}
               </span>
@@ -58,8 +61,9 @@ const App = () => {
 
       <div 
         id="nextSection"
-        className="h-screen flex bg-green-600 relative justify-center place-items-center">
-        <h2 className='text-9xl font-bold text-white'>2024</h2>
+        className="h-screen w-full flex relative justify-center place-items-center">
+          <Confetti />
+          <h2 className="next-section-heading text-9xl font-bold text-white">2024</h2>
       </div>
     </div>
     
