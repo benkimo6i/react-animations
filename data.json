@@ -1,18 +1,21 @@
 {
   "themes": {
-    "xmas": [
-      {
-        "copy": "We wish you a merry xmas"
-      },
-      {
-        "copy": "We wish you a merry xmas"
-      },
-      {
-        "copy": "We wish you a merry xmas"
-      },
-      {
-        "copy": "And a happy new year!"
-      }
-    ]
+    "xmas": {
+      "intro": [
+        {
+          "copy": "We wish you a merry xmas"
+        },
+        {
+          "copy": "We wish you a merry xmas"
+        },
+        {
+          "copy": "We wish you a merry xmas"
+        },
+        {
+          "copy": "And a happy new year!"
+        }
+      ],
+      "text": "2024"
+    }
   }
 }

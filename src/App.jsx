@@ -6,6 +6,7 @@ import Confetti from './components/Confetti'
 
 const App = () => {
   const introRef = useRef(null);
+  const theme = data.themes.xmas;
 
   useLayoutEffect(() => {
     const spans = ['#copy1', '#copy2', '#copy3', '#copy4'];
@@ -50,20 +51,21 @@ const App = () => {
       <div 
         id="introSection"
         className="h-screen flex flex-col justify-center place-items-center p-10 bg-red-700 absolute top-0 left-0 z-10 w-full gap-10 tracking-tight">
-          <h1 className="text-6xl font-semibold text-white">
-            {data.themes.xmas.map((span, i) => (
-              <span key={i} id={`copy${i + 1}`} className="block">
-                {span.copy}
-              </span>
-            ))}
-          </h1>
+
+        <h1 className="text-6xl font-semibold text-white">
+          {theme.intro.map((span, i) => (
+            <span key={i} id={`copy${i + 1}`} className="block">
+              {span.copy}
+            </span>
+          ))}
+        </h1>
       </div>
 
       <div 
         id="nextSection"
         className="h-screen w-full flex relative justify-center place-items-center">
-          <Confetti />
-          <h2 className="next-section-heading text-9xl font-bold text-white">2024</h2>
+
+        <Confetti />
       </div>
     </div>
     
