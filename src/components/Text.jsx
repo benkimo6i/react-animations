@@ -1,37 +1,53 @@
-import { useRef } from 'react'
 import {
   Text3D,
   Center,
-  useMatcapTexture
+  MeshTransmissionMaterial
 } from '@react-three/drei'
-import { useThree } from "@react-three/fiber";
-
+import { useLoader } from '@react-three/fiber'
+import { RGBELoader } from 'three-stdlib'
 
 const Text = () => {
-  const [matcapTexture] = useMatcapTexture("CB4E88_F99AD6_F384C3_ED75B9");
-  const ref = useRef();
-  const { width: w, height: h } = useThree((state) => state.viewport);
+  const texture = useLoader(RGBELoader, 'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr');
+
 
   return (
     <>
-      <Center scale={[1, 1, 1]}>
+      <Center scale={[2, 2, 2]} front top>
         <Text3D
-          position={[0, 0, -10]}
-          scale={[1, 1, 1]}
-          ref={ref}
-          size={w / 9}
-          maxWidth={[-w / 5, -h * 2, 3]}
-          font={'../Inter_Medium_Regular.json'}
-          curveSegments={24}
-          brevelSegments={1}
+          castShadow
           bevelEnabled
-          bevelSize={0.08}
-          bevelThickness={0.03}
-          height={1}
-          lineHeight={0.9}
+          font={'../Inter_Medium_Regular.json'}
+          scale={5}
+          letterSpacing={-0.03}
+          height={0.25}
+          bevelSize={0.01}
+          bevelSegments={10}
+          curveSegments={128}
+          bevelThickness={0.01}
         >
           {`2024`}
-          <meshMatcapMaterial color="white" matcap={matcapTexture} />
+
+          <MeshTransmissionMaterial 
+            backside={true}
+            backsideThickness={0.3}
+            samples={16}
+            resolution={1024}
+            transmission={1}
+            clearcoat={0}
+            clearcoatRoughness={0.0}
+            thickness={0.3}
+            chromaticAberration={5}
+            anisotropy={0.3}
+            roughness={0}
+            distortion={0.5}
+            distortionScale={0.1}
+            temporalDistortion={0}
+            ior={1.5}
+            color={"#ff9cf5"}
+            gColor={"#ff7eb3"}
+            shadow={"#750d57"}
+            autoRotate={false} 
+            background={texture} />
         </Text3D>
       </Center>
     </>
